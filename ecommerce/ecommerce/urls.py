@@ -15,15 +15,21 @@ Including another URLconf
 """
 from django.conf.urls import url,include
 from django.contrib import admin
-from django.urls import path
+from django.urls import path,re_path
 from rest_framework.urlpatterns import format_suffix_patterns
 from ecommerce_app import views
+# from .views import Productlist
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
     url(r'^stores/',views.Storelist.as_view()),
     url(r'^categories/',views.Categorylist.as_view()),
     url(r'^subcategories/',views.Subcategorylist.as_view()),
     url(r'^products/',views.Productlist.as_view()),
+    # url(r'^products/(?P<pk>[0-9]+)/',views.Productlist.as_view()),
+    # re_path(r'^products/(?P<id>[0-9]+)/', views.Productlist.as_view()),
+    url(r'^products/(?P<id>\w+)$', views.Productlist.as_view(),name='Productlist'),
+    url(r'^categories/(?P<id>\w+)$', views.Categorylist.as_view(),name='categorylist'),
+
     url(r'^store_products/',views.Storeproductlist.as_view()),
 
 

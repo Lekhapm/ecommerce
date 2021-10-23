@@ -14,7 +14,12 @@ class Storelist(APIView):
 		serializer=StoreSerializer(stores,many=True)
 		return Response(serializer.data)
 class Categorylist(APIView):
-	def get(self,request):
+	def get(self,request,id=None):
+		print("id:",id)
+		if id:
+			item = Category.objects.get(id=id)
+			serializer = ProductSerializer(item)
+			return Response({"status": "success", "data": serializer.data}, status=status.HTTP_200_OK)
 		category=Category.objects.all()
 		print("category:",category)
 		serializer=CategorySerializer(category,many=True)
@@ -26,7 +31,12 @@ class Subcategorylist(APIView):
 		serializer=SubCategorySerializer(subcategory,many=True)
 		return Response(serializer.data)
 class Productlist(APIView):
-	def get(self,request):
+	def get(self,request,id=None):
+		print("id:",id)
+		if(id):
+			item = Product.objects.get(id=id)
+			serializer = ProductSerializer(item)
+			return Response({"status": "success", "data": serializer.data}, status=status.HTTP_200_OK)
 		product=Product.objects.all()
 		print("product:",product)
 		serializer=ProductSerializer(product,many=True)
