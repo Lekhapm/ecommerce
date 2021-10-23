@@ -49,15 +49,15 @@ class StoreAdmin(models.Model):
 	def __str__(self):
 		return self.user.username
 class Cart(models.Model):
-	name=models.CharField(max_length=30,null=True)
+	item=models.CharField(max_length=30,null=True)
 	user=models.ForeignKey(Customer, on_delete=models.CASCADE)
 	def __str__(self):
-		return self.name
+		return self.item
 class CartItem(models.Model):
 	cart=models.ForeignKey(Cart, on_delete=models.CASCADE)
-	product=models.ForeignKey(Product, on_delete=models.CASCADE)
+	# product=models.ForeignKey(Product, on_delete=models.CASCADE)
 	quantity=models.IntegerField(null=True)
 	price=models.IntegerField(null=True)
 	active_status=models.BooleanField(default=False)
 	def __str__(self):
-		return self.cart.name
+		return self.cart.item
